@@ -25,7 +25,7 @@ const counter = createSlice({
 const store = configureStore({
   reducer: {
     counter: counter.reducer
-  },
+  }
 })
 
 
