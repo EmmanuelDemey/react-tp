@@ -1,11 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { RootState, dislike, isLiked, like } from "./store";
 
-function getIDFromUrl(url: string) {
-  const withoutPrefix = url.replace("https://swapi.dev/api/people/", "");
-  return withoutPrefix.replace("/", "");
-}
+import { PeopleItem } from "./PeopleItem";
 
 type PeopleFilterProps = {
   value: string;
@@ -21,32 +15,7 @@ export const PeopleFilter = ({ onFilter, value }: PeopleFilterProps) => {
   );
 };
 
-export const PeopleItem = ({ p }: { p: any }) => {
-  const dispatch = useDispatch();
-  const isAlreadyLiked: boolean = useSelector((state: RootState) => isLiked(state, p));
 
-  return (
-    <tr>
-      <td>
-        <Link to={"/person/" + getIDFromUrl(p.url)}>{p.name}</Link>
-      </td>
-      <td>{p.gender}</td>
-      <td>{p.birth_year}</td>
-      <td>
-        {!isAlreadyLiked && (
-          <button type="button" className="button is-warning" onClick={() => dispatch(like(p))}>
-            I Like
-          </button>
-        )}
-        {isAlreadyLiked && (
-          <button type="button" className="button is-warning" onClick={() => dispatch(dislike(p))}>
-            I Dislike
-          </button>
-        )}
-      </td>
-    </tr>
-  );
-};
 export const PeopleTable = ({ people }: { people: any[] }) => {
   return (
     <table className="table is-fullwidth">

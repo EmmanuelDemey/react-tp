@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { PeopleFilter, PeopleTable } from "./People";
 import { useSelector } from 'react-redux'
 import { RootState, getAllLikesCount } from "./store";
-
+import {useTranslation} from 'react-i18next'
 
 export const Home = () => {
+  const { t } = useTranslation();
   const peopleCount = useSelector((state: RootState) => getAllLikesCount(state))
   const [filter, setFilter] = useState("");
   const [people, setPeople] = useState([]);
@@ -30,7 +31,7 @@ export const Home = () => {
           My first website with <strong>Bulma</strong>!
         </p>
       </div>
-      <h2>Vous aimez {peopleCount} personnages</h2>
+      <h2>Vous aimez {t('COUNT', {count: peopleCount})}</h2>
 
       <PeopleFilter value={filter} onFilter={setFilter}></PeopleFilter>
       {loader}
