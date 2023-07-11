@@ -1,19 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import { Home } from "./Page";
+import { lazy, Suspense } from "react";
 
-function App() {
+const Detail = lazy(() => import('./Detail'));
+
+const router = createBrowserRouter([{
+  path: "",
+  element: <Home></Home>
+}, {
+  path: "person/:id",
+  element: <Suspense><Detail></Detail></Suspense>
+}])
+
+const App = () => {
   return (
-    <section className="section">
-      <div className="container">
-        <h1 className="title">Hello World</h1>
-        <p className="subtitle" >
-          My first website with <strong>Bulma</strong>!
-        </p>
-      </div>
-    </section>
+    <RouterProvider router={router}></RouterProvider>
   );
-}
-
+};
 
 export default App;
+
