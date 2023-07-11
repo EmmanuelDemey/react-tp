@@ -5,6 +5,8 @@ import {
 } from "react-router-dom";
 import { Home } from "./Page";
 import { lazy, Suspense } from "react";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const Detail = lazy(() => import('./Detail'));
 
@@ -18,7 +20,9 @@ const router = createBrowserRouter([{
 
 const App = () => {
   return (
-    <RouterProvider router={router}></RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}></RouterProvider>
+    </Provider>
   );
 };
 
