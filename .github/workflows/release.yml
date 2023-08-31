@@ -28,6 +28,7 @@ jobs:
           node-version: 16
       - run: yarn
       - run: yarn build
+      - run: yarn create-zip
       - run: git config --global user.email "demey.emmanuel@gmail.com"
       - run: git config --global user.name "Emmanuel Demey"
       - run: npm version ${{ inputs.version }}
