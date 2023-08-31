@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+  
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -34,14 +36,8 @@ jobs:
       - run: git add .
       - run: git commit -am "Create Release ${{ inputs.version }}"
       - run: git tag ${{ inputs.version }}
-      - run: git push --tags
-      - uses: actions/upload-artifact@master
-        with:
-          name: bauhaus
-          path: ./build
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           tag_name: "${{ inputs.version }}"
           draft: false
