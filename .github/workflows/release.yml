@@ -35,7 +35,6 @@ jobs:
       - run: npm version ${{ inputs.version }}
       - run: git add .
       - run: git commit -am "Create Release ${{ inputs.version }}"
-      - run: git tag ${{ inputs.version }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
