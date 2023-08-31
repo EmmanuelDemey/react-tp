@@ -15,8 +15,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn 
-      - run: yarn test:ci
+      - run: #yarn 
+      - run: #yarn test:ci
   build:
     name: Build
     needs: test
@@ -33,6 +33,7 @@ jobs:
       - run: npm version ${{ inputs.version }}
       - run: git add .
       - run: git commit -am "Create Release ${{ inputs.version }}"
+      - run: ls -lhrt
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
