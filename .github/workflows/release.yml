@@ -15,8 +15,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: #yarn 
-      - run: #yarn test:ci
+      - run: yarn 
+      - run: yarn test:ci
   build:
     name: Build
     needs: test
