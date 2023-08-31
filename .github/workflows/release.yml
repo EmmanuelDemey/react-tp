@@ -31,28 +31,20 @@ jobs:
       - run: git config --global user.email "demey.emmanuel@gmail.com"
       - run: git config --global user.name "Emmanuel Demey"
       - run: npm version ${{ inputs.version }}
+      - run: git commit -am "Create Release ${{ inputs.version }}"
+      - run: git tag ${{ inputs.version }}
+      - run: git push --tags
       - uses: actions/upload-artifact@master
         with:
           name: bauhaus
           path: ./build
-      - name: Commit & Push changes
-        uses: actions-js/push@master
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          message: "Create Release ${{ inputs.version }}"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-  release:
-    name: Release
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ inputs.version }}
-          release_name: Release ${{ inputs.version }}
+          tag_name: "${{ inputs.version }}"
           draft: false
           prerelease: false
-      
+          files: |
+            ./build
+        
