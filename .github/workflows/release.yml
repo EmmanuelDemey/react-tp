@@ -31,6 +31,7 @@ jobs:
       - run: git config --global user.email "demey.emmanuel@gmail.com"
       - run: git config --global user.name "Emmanuel Demey"
       - run: npm version ${{ inputs.version }}
+      - run: git add .
       - run: git commit -am "Create Release ${{ inputs.version }}"
       - run: git tag ${{ inputs.version }}
       - run: git push --tags
