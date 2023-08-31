@@ -18,6 +18,7 @@
     "babel-loader": "^8.2.3",
     "babel-plugin-named-asset-import": "^0.3.8",
     "babel-preset-react-app": "^10.0.1",
+    "bestzip": "^2.2.1",
     "bfj": "^7.0.2",
     "browserslist": "^4.18.1",
     "bulma": "^0.9.3",
@@ -80,7 +81,8 @@
     "test:watch": "node scripts/test.js --watchAll=true",
     "lint": "eslint src/ --fix",
     "cypress:run": "cypress run",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "create-zip": "cd build && bestzip build.zip *"
   },
   "eslintConfig": {
     "rules": {
