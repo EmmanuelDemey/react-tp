@@ -28,13 +28,13 @@ jobs:
           node-version: 16
       - run: yarn
       - run: yarn build
+      - run: git config --global user.email "demey.emmanuel@gmail.com"
+      - run: git config --global user.name "Emmanuel Demey"
       - run: npm version ${{ inputs.version }}
       - uses: actions/upload-artifact@master
         with:
           name: bauhaus
           path: ./build
-      - run: git config --global user.email "demey.emmanuel@gmail.com"
-      - run: git config --global user.name "Emmanuel Demey"
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
